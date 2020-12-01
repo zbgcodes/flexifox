@@ -1,2 +1,267 @@
-<html>
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>FlexiFox</title>
+
+	<!-- Scripts -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.js'></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-resource.min.js"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.js'></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<script src="https://kit.fontawesome.com/132f414807.js" crossorigin="anonymous"></script>
+  <script src="app.js"></script>
+	<script src="menu.js"></script>
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+	<link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto Slab'>
+	<link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css'>
+	<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+	<div class="container-fluid" ng-app="flexiFoxApp" ng-controller="mainController">
+		<div class="row">
+<!--------------------------------------------------------------------------------------------------- ACCORDION -->	
+		<div class="col-lg-12">
+			<div class="accMenu">
+				<nav class="navbar navbar-default">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<a class="navbar-brand" href="#">FlexiFox</a>
+						</div>
+						<ul class="nav navbar-nav">
+							<li id="btnboxTab0">
+								<a id="accboxTab0" href="#" onclick="accordion('boxTab0')" title="{{ tabConfig[0].label }}">{{ tabConfig[0].label }}</a>
+							</li>	
+							
+							<li id="btnboxTab1">
+								<a id="accboxTab1" href="#btnboxTab1" onclick="accordion('boxTab1')" title="{{ tabConfig[1].label }}">{{ tabConfig[1].label }}</a>
+							</li>	
+							
+							<li id="btnboxTab2">
+								<a id="accboxTab2" href="#" onclick="accordion('boxTab2')" title="{{ tabConfig[2].label }}">{{ tabConfig[2].label }}</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+			<div class="pageContent">
+<!--------------------------------------------------------------------------------------------------- HOME -->
+				<div class="box" id="boxTab0">
+					<h1><i class="fas fa-clock"></i> Current Balance: {{currentBalance}}</h1>
+          <hr />
+          <p>Week Commencing XX/XX/XX</p>
+          <table class="box">
+            <thead>
+              <tr>
+                <td></td>
+                <td>MON</td>
+                <td>TUE</td>
+                <td>WED</td>
+                <td>THU</td>
+                <td>FRI</td>
+                <td>SAT</td>
+                <td>SUN</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>AM In</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>AM Out</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>PM In</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>PM Out</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Adjustments</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Totals</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+                
+            </tbody>
+          </table>              
+						<p class="clear" />
+						 <br />
+				<!-- Modal : Quick Note -->
+				<div class="modal fade" id="quickNoteModal" role="dialog">
+					<div class="modal-dialog modal-lg" ng-model="toDoItem">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="bold">Quick Note ({{ quickNoteItem.id }})</h4>
+							</div>
+							<div class="modal-body">
+								<div class="kbModalIssue">
+									<span id="quickNoteDesc" >{{ quickNoteItem.note }}</span>
+								</div>								
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="quickNoteDelete(quickNoteItem.id)">
+									<i class="fas fa-trash-alt"></i> Delete
+								</button>
+								<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>						
+				</div>
+
+<!--------------------------------------------------------------------------------------------------- KNOWLEDGEBASE -->
+			<div class="box" id="boxTab1">
+				<h1><i class="fas fa-heart"></i> Favourites</h1>
+				<table>
+				<thead>
+					<tr>
+						<td>
+							<a href="#" ng-click="sortTypeKB = 'sw'; sortReverse = !sortReverse">
+							Entry ID 
+							<span ng-show="sortTypeKB == 'sw' && !sortReverse" class="fa fa-caret-down"></span>
+							<span ng-show="sortTypeKB == 'sw' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</td>
+						<td>
+							<a href="#" ng-click="sortTypeKB = 'mo'; sortReverse = !sortReverse">
+							Area/Module 
+							<span ng-show="sortTypeKB == 'mo' && !sortReverse" class="fa fa-caret-down"></span>
+							<span ng-show="sortTypeKB == 'mo' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</td>							
+						<td>Issue</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr id="tableRow" ng-repeat="entry in dataTab1 | orderBy:sortTypeKB:sortReverse | filter:{f:true}">
+							<td width="100">{{ entry.id }}</span></td>
+							<td width="150">{{ entry.mo }}</td>
+							<td width="550"><a href="#" ng-click="selectedKBItem(entry.id)" data-toggle="modal" data-target="#kbModal" title="View Entry {{ entry.id }}">{{ entry.is }}</a></td>
+					 </tr>
+				</tbody>
+			</table>
+			<h1><i class="fas fa-book"></i> All Articles</h1>			
+			<table>
+				<thead>
+					<tr>
+						<td>
+							<a href="#" ng-click="sortTypeKB = 'sw'; sortReverse = !sortReverse">
+							Entry ID 
+							<span ng-show="sortTypeKB == 'sw' && !sortReverse" class="fa fa-caret-down"></span>
+							<span ng-show="sortTypeKB == 'sw' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</td>
+						<td>
+							<a href="#" ng-click="sortTypeKB = 'mo'; sortReverse = !sortReverse">
+							Area/Module 
+							<span ng-show="sortTypeKB == 'mo' && !sortReverse" class="fa fa-caret-down"></span>
+							<span ng-show="sortTypeKB == 'mo' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</td>							
+						<td>Issue</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr id="tableRow" ng-repeat="entry in dataTab1 | orderBy:sortTypeKB:sortReverse | filter:searchKB" ng-hide="$first">
+							<td width="100">{{ entry.id }}</span></td>
+							<td width="150">{{ entry.mo }}</td>
+							<td width="550"><a href="#" ng-click="selectedKBItem(entry.id)" data-toggle="modal" data-target="#kbModal" title="View Entry {{ entry.id }}">{{ entry.is }}</a></td>
+					 </tr>
+				</tbody>
+			</table>
+			<!-- Modal : Knowledgebase Entry Detail -->
+			<div class="modal fade" id="kbModal" role="dialog">
+					<div class="modal-dialog modal-lg" ng-model="kbItem">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="bold">Knowledgebase Entry #{{ kbItem.id }}</h4>
+								<p>{{ kbSoftware[kbItem.sw] }} // {{ kbItem.mo }}</p>
+							</div>
+							<div class="modal-body">
+								<div class="kbModalIssue">
+									<p>Issue:</p>
+									<span ng-bind-html="kbItem.is">{{ kbItem.is }}</span>
+								</div>
+								<div class="kbModalSolution">
+									<p>Solution:</p>
+									<span ng-bind-html="kbItem.so">{{ kbItem.so }}</span>	
+								</div>
+								<div class="kbModalLink">
+									<p>Related Links:</p>
+									<span><a href="{{ kbItem.link }}" title="Visit {{ kbItem.link }}" target="_blank">{{ kbItem.link }}</a></span>	
+								</div>									
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Edit</button>
+								<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>	
+
+		</div>	
+	</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="pageFooter">
+				<p>Personal Dashboard - Version: {{ dashVer() }} - Created by <a href="https://github.com/themattprime">Matt Prime</a> 2019</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
 </html>
